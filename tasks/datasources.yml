@@ -20,6 +20,12 @@
     aws_secret_key: "{{ item.aws_secret_key | default(omit) }}"
     aws_credentials_profile: "{{ item.aws_credentials_profile | default(omit) }}"
     aws_custom_metrics_namespaces: "{{ item.aws_custom_metrics_namespaces | default(omit) }}"
+#    sigV4AuthType: "{{ item.sigV4AuthType | default(omit) }}"
+#    sigV4Region: "{{ item.sigV4Region | default(omit) }}"
+#    sigV4AccessKey: "{{ item.sigV4AccessKey | default(omit) }}"
+#    sigV4SecretKey: "{{ item.sigV4SecretKey | default(omit) }}"
+#    esVersion: "{{ item.esVersion | default(omit) }}"
+#    timeField: "{{ item.timeField | default(omit) }}"
   with_items: "{{ grafana_datasources }}"
   when: not grafana_use_provisioning
 

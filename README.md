@@ -1,7 +1,3 @@
-# DEPRECATED
-
-**This role has been deprecated in favor of a the [grafana-ansible-collection](https://github.com/grafana/grafana-ansible-collection) collection.**
-
 <p><img src="https://grafana.com/blog/assets/img/blog/timeshift/grafana_release_icon.png" alt="grafana logo" title="grafana" align="right" height="60" /></p>
 
 # Ansible Role: grafana
@@ -28,9 +24,10 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | -------------- | ------------- | -----------------------------------|
 | `grafana_use_provisioning` | true | Use Grafana provisioning capability when possible (**grafana_version=latest will assume >= 5.0**). |
 | `grafana_provisioning_synced` | false | Ensure no previously provisioned dashboards are kept if not referenced anymore. |
+| `grafana_system_user` | grafana | Grafana server system user |
+| `grafana_system_group` | grafana | Grafana server system group |
 | `grafana_version` | latest | Grafana package version |
 | `grafana_yum_repo_template` | etc/yum.repos.d/grafana.repo.j2 | Yum template to use |
-| `grafana_manage_repo` | true | Manage package repo (or don't) |
 | `grafana_instance` | {{ ansible_fqdn \| default(ansible_host) \| default(inventory_hostname) }} | Grafana instance name |
 | `grafana_logs_dir` | /var/log/grafana | Path to logs directory |
 | `grafana_data_dir` | /var/lib/grafana | Path to database directory |
@@ -61,7 +58,6 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | `grafana_datasources` | [] | List of datasources which should be configured |
 | `grafana_environment` | {} | Optional Environment param for Grafana installation, useful ie for setting http_proxy |
 | `grafana_plugins` | [] |  List of Grafana plugins which should be installed |
-| `grafana_alert_notifications` | [] | List of alert notification channels to be created, updated, or deleted |
 
 Datasource example:
 
@@ -82,30 +78,6 @@ grafana_dashboards:
     revision_id: 1
     datasource: prometheus
 ```
-
-Alert notification channel example:
-
-**NOTE**: setting the variable `grafana_alert_notifications` will only come into
-effect when `grafana_use_provisioning` is `true`. That means the new
-provisioning system using config files, which is available starting from Grafana
-v5.0, needs to be in use.
-
-```yaml
-grafana_alert_notifications:
-  notifiers:
-    - name: Channel 1
-      type: email
-      uid: channel1
-      is_default: false
-      send_reminder: false
-      settings:
-        addresses: "example@example.com"
-        autoResolve: true
-  delete_notifiers:
-    - name: Channel 2
-      uid: channel2
-```
-
 Use a custom Grafana Yum repo template example:
 
 - Put your template next to your playbook under `templates` folder
@@ -175,10 +147,6 @@ Combining molecule and travis CI allows us to test how new PRs will behave when 
 ## Contributing
 
 See [contributor guideline](CONTRIBUTING.md).
-
-## Troubleshooting
-
-See [troubleshooting](TROUBLESHOOTING.md).
 
 ## License
 

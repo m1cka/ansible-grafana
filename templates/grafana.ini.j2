@@ -20,7 +20,7 @@ http_addr = {{ grafana_address }}
 http_port = {{ grafana_port }}
 {% endif %}
 domain = {{ grafana_domain }}
-root_url = {{ grafana_url }}
+root_url = {{ grafana_ext_url }}
 {% for k,v in grafana_server.items() %}
 {%   if not k in ['http_addr', 'http_port', 'domain', 'root_url'] %}
 {{ k }} = {{ v }}
@@ -66,8 +66,10 @@ disable_login_form = {{ grafana_auth.disable_login_form | default('False') }}
 oauth_auto_login = {{ grafana_auth.oauth_auto_login | default('False') }}
 disable_signout_menu = {{ grafana_auth.disable_signout_menu | default('False') }}
 signout_redirect_url = {{ grafana_auth.signout_redirect_url | default('') }}
+sigv4_auth_enabled = {{ grafana_auth.sigv4_auth_enabled | default('False') }}
 {%  for section, options in grafana_auth.items() %}
-{%    if options is mapping %}
+{%    if section in ['disable_login_form', 'oauth_auto_login', 'disable_signout_menu', 'signout_redirect_url', 'sigv4_auth_enabled'] %}
+{%    else %}
 [auth.{{ section }}]
 {%      if "enabled" not in options %}
 enabled = True
@@ -75,8 +77,6 @@ enabled = True
 {%      for k, v in options.items() %}
 {{ k }} = {{ v }}
 {%      endfor %}
-{%    else %}
-{{ section }} = {{ options }}
 {%    endif %}
 {%  endfor %}
 {% endif %}
@@ -124,7 +124,7 @@ enabled = True
 {%   for k,v in grafana_smtp.items() %}
 {%     if k == 'enabled' %}{% endif %}
 {%     if k == 'password' %}
-{{ k }} = """{{ v }}"""
+{{ k }} = {{ v }}
 {%     else %}
 {{ k }} = {{ v }}
 {%     endif %}
@@ -137,23 +137,15 @@ mode = {{ grafana_log.mode | default('console, file') }}
 level = {{ grafana_log.level | default('info') }}
 
 # Metrics
-[metrics]
 {% if grafana_metrics != {} %}
+[metrics]
 enabled = true
 interval_seconds = {{ grafana_metrics.interval_seconds | default(10) }}
-{%   if grafana_metrics.basic_auth_username is defined %}
-basic_auth_username = {{ grafana_metrics.basic_auth_username }}
-{%   endif %}
-{%   if grafana_metrics.basic_auth_password is defined %}
-basic_auth_password = """{{ grafana_metrics.basic_auth_password }}"""
-{%   endif %}
 {%   if grafana_metrics.graphite is defined %}
 [metrics.graphite]
 address = {{ grafana_metrics.graphite.address }}
 prefix = {{ grafana_metrics.graphite.prefix }}
 {%   endif %}
-{% else %}
-enabled = false
 {% endif %}
 
 # Tracing
