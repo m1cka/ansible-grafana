@@ -4,40 +4,11 @@
 
 **Fixed bugs:**
 
-- grafana\_system\_user and grafana\_system\_group are not used [\#238](https://github.com/cloudalchemy/ansible-grafana/issues/238)
-
-**Merged pull requests:**
-
-- \[REPO SYNC\] add troubleshooting doc skeleton [\#234](https://github.com/cloudalchemy/ansible-grafana/pull/234) ([cloudalchemybot](https://github.com/cloudalchemybot))
-- enable basic auth in metrics section [\#225](https://github.com/cloudalchemy/ansible-grafana/pull/225) ([kgizdov](https://github.com/kgizdov))
-- Add parameter to enable/disable repository management [\#217](https://github.com/cloudalchemy/ansible-grafana/pull/217) ([faxm0dem](https://github.com/faxm0dem))
-
-## [0.18.0](https://galaxy.ansible.com/cloudalchemy/grafana) (2020-07-26)
-**Fixed bugs:**
-
-- Configuration fails for unlisted options in template for grafana\_auth [\#218](https://github.com/cloudalchemy/ansible-grafana/issues/218)
-- Unable to use with Ubuntu 18.04. [\#191](https://github.com/cloudalchemy/ansible-grafana/issues/191)
-
-**Merged pull requests:**
-
-- Provision alert notification channels using config file [\#227](https://github.com/cloudalchemy/ansible-grafana/pull/227) ([hyzth](https://github.com/hyzth))
-- Make sure to create default plugin provisioning directory [\#226](https://github.com/cloudalchemy/ansible-grafana/pull/226) ([hyzth](https://github.com/hyzth))
-- Fix "dashbards" typo [\#224](https://github.com/cloudalchemy/ansible-grafana/pull/224) ([hectorj](https://github.com/hectorj))
-- \[REPO SYNC\] Add passlib as a test requirement [\#223](https://github.com/cloudalchemy/ansible-grafana/pull/223) ([cloudalchemybot](https://github.com/cloudalchemybot))
-- add test for custom grafana auth section option [\#222](https://github.com/cloudalchemy/ansible-grafana/pull/222) ([faxm0dem](https://github.com/faxm0dem))
-- Fix custom auth option not showing up [\#221](https://github.com/cloudalchemy/ansible-grafana/pull/221) ([faxm0dem](https://github.com/faxm0dem))
-- Cleaner and more general handling of auth options [\#219](https://github.com/cloudalchemy/ansible-grafana/pull/219) ([faxm0dem](https://github.com/faxm0dem))
-
-## [0.17.0](https://galaxy.ansible.com/cloudalchemy/grafana) (2020-03-30)
-**Fixed bugs:**
-
-- cast grafana\_port to int before comparing it to 1024 [\#212](https://github.com/cloudalchemy/ansible-grafana/issues/212)
 - This role does not work with RPi 1 [\#207](https://github.com/cloudalchemy/ansible-grafana/issues/207)
 - Installation fails due to missing package libfontconfig on Ubuntu 18.04 [\#200](https://github.com/cloudalchemy/ansible-grafana/issues/200)
 
 **Merged pull requests:**
 
-- cast grafana\_port to int. Fix \#212 [\#213](https://github.com/cloudalchemy/ansible-grafana/pull/213) ([kapouer](https://github.com/kapouer))
 - Avoid being clever about unsupported architectures [\#211](https://github.com/cloudalchemy/ansible-grafana/pull/211) ([bwolf](https://github.com/bwolf))
 - Fix RPi 1 issue when grafana-rpi package needs to be installed \(\#207\) [\#208](https://github.com/cloudalchemy/ansible-grafana/pull/208) ([ruzickap](https://github.com/ruzickap))
 
@@ -252,7 +223,7 @@
 **Merged pull requests:**
 
 - use tox, ansible 2.6, and allow using remote docker host [\#67](https://github.com/cloudalchemy/ansible-grafana/pull/67) ([paulfantom](https://github.com/paulfantom))
-- Add examples for datasource and dashboard configs [\#66](https://github.com/cloudalchemy/ansible-grafana/pull/66) ([bitphage](https://github.com/bitphage))
+- Add examples for datasource and dashboard configs [\#66](https://github.com/cloudalchemy/ansible-grafana/pull/66) ([bitfag](https://github.com/bitfag))
 
 ## [0.9.0](https://galaxy.ansible.com/cloudalchemy/grafana) (2018-06-16)
 **Closed issues:**

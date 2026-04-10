@@ -1,7 +1,6 @@
 ---
 grafana_version: latest
 grafana_yum_repo_template: etc/yum.repos.d/grafana.repo.j2
-grafana_manage_repo: true
 
 # Should we use the provisioning capability when possible (provisioning require grafana >= 5.0)
 grafana_use_provisioning: true
@@ -25,6 +24,7 @@ grafana_cap_net_bind_service: false
 grafana_url: "http://{{ grafana_address }}:{{ grafana_port }}"
 grafana_api_url: "{{ grafana_url }}"
 grafana_domain: "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}"
+grafana_ext_url: "https://{{project_host}}"
 
 # Additional options for grafana "server" section
 # This section WILL omit options for: http_addr, http_port, domain, and root_url, as those settings are set by variables listed before
@@ -87,6 +87,7 @@ grafana_auth: {}
 #  oauth_auto_login: false
 #  disable_signout_menu: false
 #  signout_redirect_url: ""
+#  sigv4_auth_enabled: false
 #  anonymous:
 #    org_name: "Main Organization"
 #    org_role: Viewer
@@ -209,15 +210,16 @@ grafana_dashboards: []
 #    datasource: 'Prometheus'
 
 grafana_dashboards_dir: "dashboards"
-
+# allow dashboards update
+grafana_allow_dash_update: false
+grafana_folders_from_files_structure: false
 # Alert notification channels to configure
 grafana_alert_notifications: []
-#  - name: "Email Alert"
-#    type: "email"
-#    uid: channel1
-#    is_default: true
-#    settings:
-#      addresses: "example@example.com"
+#   - name: "Email Alert"
+#     type: "email"
+#     isDefault: true
+#     settings:
+#       addresses: "example@example.com"
 
 # Datasources to configure
 grafana_datasources: []
